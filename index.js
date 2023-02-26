@@ -99,31 +99,44 @@ const menuQuestions = [
 function init() {
     console.log('init');
     //ask Manager Questions
-    addManager();
-}
+    addManager()
+    
+    //.then(() => displayMenu())
+
+
+    };
 
 //function to add manager
 function addManager() {
     console.log('add manager');
-    inquirer.prompt(managerQuestions);
+    inquirer.prompt(managerQuestions)
+    .then(() => displayMenu());
+   /* .then (function displayMenu () {
+        console.log('display menu');
+        inquirer.prompt(menuQuestions)
+
+    })*/
 }
 
 //function to display menu
 function displayMenu() {
-    console.log('display menu');
-    inquirer.prompt(menuQuestions);
+    inquirer.prompt(menuQuestions)
 }
 
 //function to add intern
 function addIntern() {
     console.log('add intern');
-    inquirer.prompt(internQuestions);
+    inquirer.prompt(internQuestions)
+    .then(() => displayMenu())
+
 }
 
 //function to add engineer
 function addEngineer() {
     console.log('add engineer');
-    inquirer.prompt(engineerQuestions);
+    inquirer.prompt(engineerQuestions)
+    .then(() => displayMenu())
+
 }
 
 
