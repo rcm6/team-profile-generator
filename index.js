@@ -11,7 +11,12 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./src/page-template.js");
 
 
+
+
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
+
+//array for team members
+const team = [];
 
 //manager questions
 const managerQuestions = [
@@ -100,24 +105,22 @@ function init() {
     console.log('init');
     //ask Manager Questions
     addManager()
-    
-    //.then(() => displayMenu())
-
-
-
     };
 
 //function to add manager
 function addManager() {
     //console.log('add manager');
     inquirer.prompt(managerQuestions)
+    .then(function(data){
+        //store responses
+        const mngr = new Manager(data.name, data.id, data.email, data.officeNumber)
+        //console.log (mngr)
+        team.push(mngr)
+        //console.log (team)
+        })
+    //call menu function
     .then(() => displayMenu());
 
-   /* .then (function displayMenu () {
-        console.log('display menu');
-        inquirer.prompt(menuQuestions)
-
-    })*/
 }
 
 //function to display menu
@@ -131,6 +134,7 @@ function displayMenu() {
           addIntern();
         } else{
             console.log("build team: " + choice.menu);
+            console.log (team)
         }
     });
 }
@@ -139,6 +143,15 @@ function displayMenu() {
 function addIntern() {
     console.log('add intern');
     inquirer.prompt(internQuestions)
+    .then(function(data){
+        //store responses
+        const intrn =  new Intern(data.name, data.id, data.email, data.school)
+        //console.log (intrn)
+        team.push(intrn)
+        //console.log (team)
+        })
+
+    //call menu function
     .then(() => displayMenu())
 
 }
@@ -147,6 +160,15 @@ function addIntern() {
 function addEngineer() {
     console.log('add engineer');
     inquirer.prompt(engineerQuestions)
+    .then(function(data){
+        //store responses
+        const eng = new Engineer(data.name, data.id, data.email, data.github)
+        //console.log (eng)
+        team.push(eng)
+        //console.log (team)
+        })
+
+    //call menu function
     .then(() => displayMenu())
 
 }
