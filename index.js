@@ -104,13 +104,20 @@ function init() {
     //.then(() => displayMenu())
 
 
+
     };
 
 //function to add manager
 function addManager() {
     console.log('add manager');
-    inquirer.prompt(managerQuestions)
+    //inquirer.prompt(managerQuestions)
+    mgrResponses = inquirer.prompt(managerQuestions)
+
+    .then(() => console.log(mgrResponses))
+
+
     .then(() => displayMenu());
+
    /* .then (function displayMenu () {
         console.log('display menu');
         inquirer.prompt(menuQuestions)
