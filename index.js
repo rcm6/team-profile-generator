@@ -109,13 +109,8 @@ function init() {
 
 //function to add manager
 function addManager() {
-    console.log('add manager');
-    //inquirer.prompt(managerQuestions)
-    mgrResponses = inquirer.prompt(managerQuestions)
-
-    .then(() => console.log(mgrResponses))
-
-
+    //console.log('add manager');
+    inquirer.prompt(managerQuestions)
     .then(() => displayMenu());
 
    /* .then (function displayMenu () {
@@ -128,6 +123,16 @@ function addManager() {
 //function to display menu
 function displayMenu() {
     inquirer.prompt(menuQuestions)
+    //call function based on choice
+    .then(choice => {
+        if (choice.menu === "Add an engineer") {
+          addEngineer();
+        } else if(choice.menu === "Add an intern"){
+          addIntern();
+        } else{
+            console.log("build team: " + choice.menu);
+        }
+    });
 }
 
 //function to add intern
