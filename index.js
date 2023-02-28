@@ -113,30 +113,14 @@ function addManager() {
     inquirer.prompt(managerQuestions)
     .then(function(data){
         //store responses
-        const mngr = new Manager(data.name, data.id, data.email, data.officeNumber)
+        const manager = new Manager(data.name, data.id, data.email, data.officeNumber)
         //console.log (mngr)
-        team.push(mngr)
+     team.push(manager)
         //console.log (team)
         })
     //call menu function
     .then(() => displayMenu());
 
-}
-
-//function to display menu
-function displayMenu() {
-    inquirer.prompt(menuQuestions)
-    //call function based on choice
-    .then(choice => {
-        if (choice.menu === "Add an engineer") {
-          addEngineer();
-        } else if(choice.menu === "Add an intern"){
-          addIntern();
-        } else{
-            console.log("build team: " + choice.menu);
-            console.log (team)
-        }
-    });
 }
 
 //function to add intern
@@ -145,9 +129,9 @@ function addIntern() {
     inquirer.prompt(internQuestions)
     .then(function(data){
         //store responses
-        const intrn =  new Intern(data.name, data.id, data.email, data.school)
+        const intern =  new Intern(data.name, data.id, data.email, data.school)
         //console.log (intrn)
-        team.push(intrn)
+     team.push(intern)
         //console.log (team)
         })
 
@@ -162,9 +146,9 @@ function addEngineer() {
     inquirer.prompt(engineerQuestions)
     .then(function(data){
         //store responses
-        const eng = new Engineer(data.name, data.id, data.email, data.github)
+        const engineer = new Engineer(data.name, data.id, data.email, data.github)
         //console.log (eng)
-        team.push(eng)
+     team.push(engineer)
         //console.log (team)
         })
 
@@ -173,8 +157,35 @@ function addEngineer() {
 
 }
 
+//function to display menu
+function displayMenu() {
+    inquirer.prompt(menuQuestions)
+    //call function based on choice
+    .then(choice => {
+        if (choice.menu === "Add an engineer") {
+          addEngineer();
+        } else if(choice.menu === "Add an intern"){
+          addIntern();
+        } else{
+          buildTeam()
+        }
+    });
+}
 
 
+
+//function to create output file
+  function buildTeam() {
+    //console.log(team)
+    // Create output directory if path doesn't exist
+    let renderHTML = render(team);
+    //console.log (renderHTML)
+
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR);
+    }
+    fs.writeFileSync(outputPath, renderHTML, "utf-8");
+  };
 
 //function call to initialize program
 init();
